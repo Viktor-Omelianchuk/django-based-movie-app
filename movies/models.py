@@ -50,7 +50,7 @@ class Movie(models.Model):
     title = models.CharField('Name', max_length=100)
     tagline = models.CharField('Tagline', max_length=100, default='')
     description = models.TextField("Description")
-    poster = models.ImageField('POster', upload_to='movies/')
+    poster = models.ImageField('Poster', upload_to='movies/')
     year = models.PositiveSmallIntegerField('Release date', default=2020)
     country = models.CharField("Country", max_length=100)
     directors = models.ManyToManyField(Actor, verbose_name='director', related_name='film_director')
@@ -109,7 +109,7 @@ class Rating(models.Model):
     """Rating"""
     ip = models.CharField('IP address', max_length=15)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name='Star')
-    movie = models.ForeignKey(Movie, on_delete=models.CharField, verbose_name='Movie')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='Movie')
 
     def __str__(self):
         return f"{self.star} - {self.movie}"
