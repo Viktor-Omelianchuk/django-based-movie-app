@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from .forms import ReviewForm
-from .models import Movie
+from .models import Movie, Category
 
 
 class MovieView(ListView):
@@ -10,12 +10,19 @@ class MovieView(ListView):
     model = Movie
     queryset = Movie.objects.filter(draft=False)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["categories"] = Category.objects.all()
+        context["form"] = ReviewForm()
+        return context
 
 
 class MovieDetailView(DetailView):
     """Full description of the film"""
     model = Movie
     slug_field = 'url'
+
+
 
 class AddReview(View):
     """Reviews"""
