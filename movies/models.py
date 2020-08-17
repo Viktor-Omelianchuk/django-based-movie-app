@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class Category(models.Model):
     """Categories"""
+
     name = models.CharField("Category", max_length=150)
     description = models.TextField("Description")
     url = models.SlugField(max_length=160, unique=True)
@@ -20,16 +21,17 @@ class Category(models.Model):
 
 class Actor(models.Model):
     """Аctors and directors"""
-    name = models.CharField('Name', max_length=100)
-    age = models.PositiveSmallIntegerField('Age', default=0)
-    description = models.TextField('Description')
-    image = models.ImageField('Image', upload_to='actors/')
+
+    name = models.CharField("Name", max_length=100)
+    age = models.PositiveSmallIntegerField("Age", default=0)
+    description = models.TextField("Description")
+    image = models.ImageField("Image", upload_to="actors/")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('actor_detail', kwargs={"slug": self.name})
+        return reverse("actor_detail", kwargs={"slug": self.name})
 
     class Meta:
         verbose_name = "Аctors and directors"
@@ -38,6 +40,7 @@ class Actor(models.Model):
 
 class Genre(models.Model):
     """Genre"""
+
     name = models.CharField("Name", max_length=150)
     description = models.TextField("Description")
     url = models.SlugField(max_length=160, unique=True)
@@ -52,34 +55,41 @@ class Genre(models.Model):
 
 class Movie(models.Model):
     """Movie"""
-    title = models.CharField('Name', max_length=100)
-    tagline = models.CharField('Tagline', max_length=100, default='')
+
+    title = models.CharField("Name", max_length=100)
+    tagline = models.CharField("Tagline", max_length=100, default="")
     description = models.TextField("Description")
-    poster = models.ImageField('Poster', upload_to='movies/')
-    year = models.PositiveSmallIntegerField('Release date', default=2020)
+    poster = models.ImageField("Poster", upload_to="movies/")
+    year = models.PositiveSmallIntegerField("Release date", default=2020)
     country = models.CharField("Country", max_length=100)
-    directors = models.ManyToManyField(Actor, verbose_name='director', related_name='film_director')
-    actors = models.ManyToManyField(Actor, verbose_name='Actors', related_name='film_actor')
-    genres = models.ManyToManyField(Genre, verbose_name='Genres')
+    directors = models.ManyToManyField(
+        Actor, verbose_name="director", related_name="film_director"
+    )
+    actors = models.ManyToManyField(
+        Actor, verbose_name="Actors", related_name="film_actor"
+    )
+    genres = models.ManyToManyField(Genre, verbose_name="Genres")
     world_premiere = models.DateField("World premiere", default=date.today)
-    budget = models.PositiveIntegerField('Budget', default=0, help_text='indicate the amount in dollars')
+    budget = models.PositiveIntegerField(
+        "Budget", default=0, help_text="indicate the amount in dollars"
+    )
     fees_in_usa = models.PositiveIntegerField(
-        "Fees_in_usa", default=0, help_text='indicate the amount in dollars'
+        "Fees_in_usa", default=0, help_text="indicate the amount in dollars"
     )
     fees_in_world = models.PositiveIntegerField(
-        'Fees in world', default=0, help_text='indicate the amount in dollars'
+        "Fees in world", default=0, help_text="indicate the amount in dollars"
     )
     category = models.ForeignKey(
-        Category, verbose_name='category', on_delete=models.SET_NULL, null=True
+        Category, verbose_name="category", on_delete=models.SET_NULL, null=True
     )
     url = models.SlugField(max_length=160, unique=True)
-    draft = models.BooleanField('Draft', default=False)
+    draft = models.BooleanField("Draft", default=False)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('movie_detail', kwargs={'slug': self.url})
+        return reverse("movie_detail", kwargs={"slug": self.url})
 
     def get_review(self):
         """Returns the list of reviews attached to the movie by filtering by the parent == Null field"""
@@ -92,10 +102,11 @@ class Movie(models.Model):
 
 class MovieShots(models.Model):
     """Shots from the movie"""
-    title = models.CharField('Title', max_length=100)
+
+    title = models.CharField("Title", max_length=100)
     description = models.TextField("Description")
-    image = models.ImageField('Image', upload_to='movie_shots/')
-    movie = models.ForeignKey(Movie, verbose_name='Movie', on_delete=models.CASCADE)
+    image = models.ImageField("Image", upload_to="movie_shots/")
+    movie = models.ForeignKey(Movie, verbose_name="Movie", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -107,7 +118,8 @@ class MovieShots(models.Model):
 
 class RatingStar(models.Model):
     """Rating star"""
-    value = models.SmallIntegerField('Value', default=0)
+
+    value = models.SmallIntegerField("Value", default=0)
 
     def __str__(self):
         return self.value
@@ -119,9 +131,10 @@ class RatingStar(models.Model):
 
 class Rating(models.Model):
     """Rating"""
-    ip = models.CharField('IP address', max_length=15)
-    star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name='Star')
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='Movie')
+
+    ip = models.CharField("IP address", max_length=15)
+    star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name="Star")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Movie")
 
     def __str__(self):
         return f"{self.star} - {self.movie}"
@@ -133,11 +146,12 @@ class Rating(models.Model):
 
 class Reviews(models.Model):
     """Reviews"""
+
     email = models.EmailField()
     name = models.CharField("Name", max_length=100)
     text = models.TextField("Message", max_length=5000)
     parent = models.ForeignKey(
-        'self', verbose_name="Parent", on_delete=models.SET_NULL, blank=True, null=True
+        "self", verbose_name="Parent", on_delete=models.SET_NULL, blank=True, null=True
     )
     movie = models.ForeignKey(Movie, verbose_name="Movie", on_delete=models.CASCADE)
 

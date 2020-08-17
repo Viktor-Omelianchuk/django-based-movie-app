@@ -6,17 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('movies', '0003_auto_20200814_1949'),
+        ("movies", "0003_auto_20200814_1949"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='movie',
-            name='fees_in_use',
-        ),
+        migrations.RemoveField(model_name="movie", name="fees_in_use",),
         migrations.AddField(
-            model_name='movie',
-            name='fees_in_usa',
-            field=models.PositiveIntegerField(default=0, help_text='indicate the amount in dollars', verbose_name='Fees_in_usa'),
+            model_name="movie",
+            name="fees_in_usa",
+            field=models.PositiveIntegerField(
+                default=0,
+                help_text="indicate the amount in dollars",
+                verbose_name="Fees_in_usa",
+            ),
         ),
     ]
