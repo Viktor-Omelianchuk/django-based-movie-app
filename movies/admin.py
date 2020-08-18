@@ -142,10 +142,10 @@ class ActorAdmin(admin.ModelAdmin):
     get_image.short_description = "Image"
 
 
-# @admin.register(Rating)
-# class RatingAdmin(admin.ModelAdmin):
-#     """Rating"""
-#     list_display = ("name", "ip")
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    """Rating"""
+    list_display = ("star", "movie", "ip")
 
 
 @admin.register(MovieShots)
