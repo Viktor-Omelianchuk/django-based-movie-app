@@ -1,10 +1,12 @@
+from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
-from django.db.models import Q, OuterRef, Subquery, Case, When
+
 from .forms import ReviewForm, RatingForm
 from .models import Movie, Category, Actor, Genre, Rating
-from django.http import JsonResponse, HttpResponse
+
 
 class GenreYear:
     """Genres and release years of filmsв"""
@@ -21,6 +23,7 @@ class MovieView(GenreYear, ListView):
 
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+    paginate_by = 1
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -39,6 +42,7 @@ class MovieDetailView(GenreYear, DetailView):
         context = super().get_context_data(**kwargs)
         context["star_form"] = RatingForm()
         return context
+
 
 class AddStarRating(View):
     """Add a rating to a movie"""
@@ -89,16 +93,17 @@ class ActorView(GenreYear, DetailView):
 
 class FilterMoviesView(GenreYear, ListView):
     """Movie filter"""
+    paginate_by = 1
 
     def get_queryset(self):
         queryset = Movie.objects.filter(
             Q(year__in=self.request.GET.getlist("year")) |
             Q(genres__in=self.request.GET.getlist("genre"))
-        )
+        ).distinct()
         return queryset
-    #
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super().get_context_data(*args, **kwargs)
-    #     context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
-    #     context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
-    #     return context
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
+        context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
+        return context
