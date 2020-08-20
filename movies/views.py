@@ -23,7 +23,7 @@ class MovieView(GenreYear, ListView):
 
     model = Movie
     queryset = Movie.objects.filter(draft=False)
-    paginate_by = 1
+    paginate_by = 3
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -94,7 +94,7 @@ class ActorView(GenreYear, DetailView):
 
 class FilterMoviesView(GenreYear, ListView):
     """Movie filter"""
-    paginate_by = 1
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = Movie.objects.filter(

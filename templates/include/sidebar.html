@@ -33,6 +33,15 @@
             {% endfor %}
         </ul>
     </div>
+    <div class="left-side my-4" >
+        <h3 class="sear-head editContent">Year</h3>
+        <select class="browser-default custom-select" name="year">
+            <option selected="selected" disabled>All years</option>
+            {% for movie in view.get_years %}
+                <option name="year" value="{{ movie.year }}">{{ movie.year }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <button type="submit">Search</button>
 </form>
 <!-- //discounts -->
