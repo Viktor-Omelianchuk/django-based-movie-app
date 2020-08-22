@@ -21,18 +21,6 @@
     </div>
     <!-- // preference -->
     <!-- discounts -->
-
-    <div class="left-side">
-        <h3 class="sear-head editContent">Year</h3>
-        <ul class="w3layouts-box-list">
-            {% for movie in view.get_years %}
-            <li class="editContent">
-                <input type="checkbox" class="checked" name="year" value="{{ movie.year }}">
-                <span class="span editContent">{{ movie.year }}</span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
     <div class="left-side my-4" >
         <h3 class="sear-head editContent">Year</h3>
         <select class="browser-default custom-select" name="year">
@@ -47,58 +35,6 @@
 <!-- //discounts -->
 <!-- reviews -->
 <div class="customer-rev left-side my-4">
-    <h3 class="sear-head editContent">Rating</h3>
-    <ul class="w3layouts-box-list">
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="editContent">5.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">4.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">3.5</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">3.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star" aria-hidden="true"></span>
-                <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="fa fa-star-o" aria-hidden="true"></span>
-                <span class="editContent">2.5</span>
-            </a>
-        </li>
-    </ul>
+
 </div>
 {% get_last_movies count=3 %}
