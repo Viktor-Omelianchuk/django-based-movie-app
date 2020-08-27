@@ -54,8 +54,8 @@ coverage.xml
 *.pot
 
 # Django stuff:
-*.log
-local_settings.py
+
+
 
 # Flask stuff:
 instance/
@@ -105,3 +105,9 @@ ENV/
 
 # IDE settings
 .vscode/
+movies/migrations/0008_auto_20200823_2038.py
+static/images/banner.jpg
+static/single-post-pic.jpg
+django_movie/prod_settings.py
+
+

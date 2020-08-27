@@ -52,3 +52,7 @@ run: ## run local development server
 
 migrate: ## make migrations
 	python manage.py migrate
+
+install: clean ## install the package to the active Python's site-packages
+	python -m pip install --upgrade pip
+	python -m pip install -r requirements.txt

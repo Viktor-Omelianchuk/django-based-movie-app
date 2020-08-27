@@ -15,19 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "4-o&bvv0d@m7_yc!ccj4sz-(8#(!w^8p37kwkmu2q)da2o8&07"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,15 +68,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "django_movie.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -132,9 +110,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -207,9 +183,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-RECAPTCHA_PUBLIC_KEY = "6LcchsAZAAAAAPwCMyuTqU--FBkeTheyH2oifOLw"
-RECAPTCHA_PRIVATE_KEY = "6LcchsAZAAAAAG6f7-8ITPYpr2eMFgppufHgHjvw"
+RECAPTCHA_PUBLIC_KEY = "6LdrLsMZAAAAAPFxQXcWy91nAZ_oF0x7U4kUPPad"
+RECAPTCHA_PRIVATE_KEY = "6LdrLsMZAAAAAFKL7FnFEqpZkcMazcTPHKJh34h5"
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 SITE_ID = 1
+
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *

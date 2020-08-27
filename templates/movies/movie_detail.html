@@ -11,7 +11,7 @@
         <div class="left-ads-display col-lg-8">
             <div class="row">
                 <div class="desc1-left col-md-6">
-                    <img src={{ movie.poster.url }} class="img-fluid" alt="">
+                    <img src={{ movie.poster.url }} class="img-fluid" alt="" >
                 </div>
                 <div class="desc1-right col-md-6 pl-lg-4">
                     <h3 class="editContent" style="outline: none; cursor: inherit;">
@@ -108,7 +108,7 @@
                     About movie {{ movie.title }}</h3>
                 <p>
                     {% for image in movie.movieshots_set.all %}
-                    <img src="{{ image.image.url }}" class="img-movie-shots" alt="{{ image.description }}">
+                    <img src="{{ image.image.url }}" class="img-movie-shots" alt="{{ image.description }}" >
                     {% endfor %}
                 </p>
                 <p class="editContent" style="outline: none; cursor: inherit;">
